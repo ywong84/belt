@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Appointments</title>
+  </head>
+  <body>
+    <a href='/logout'><input id='logout' type='submit' value='Logout'></a>
+    <h2>Hello, {{user.name}}</h2>
+    <table id='table1'>
+      <h1>Here are your appointments for today, {{appointment.my_appointments.dates}}</h1>
+      <tr>
+        <th>Task</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+      {% for appointment in my_appointments %}
+      <tr>
+        <td>{{appointment.my_appointments.task}}</td>
+        <td>{{appointment.my_appointments.time}}</td>
+        <td></td>
+        <td><a href='/delete/{{user.id}}'><input id='delete' type='submit' value='delete'><a href='/edit/{{user.id}}'><input id='edit' type='submit' value='edit'></td>
+      </tr>
+      {% endfor %}
+    </table>
+    <table id='table2'>
+      <h1>Your Other appointments</h1>
+      <tr>
+        <th>Task</th>
+        <th>Date</th>
+        <th>Time</th>
+      </tr>
+      {% for appointment in appointemnts%}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </table>
+    <div id='appointments'>
+      <form action="add_appointment/{{user.id}}" method="post">
+        {% csrf_token %}
+        <label>
+          Date: <input type="date" name="dates">
+        </label>
+          Time: <input type="time" name="time" placeholder="">
+        </label>
+        <label>
+          Task: <input type="text" name="task">
+        </label>
+        <label>
+          <button type="submit" class="btn btn-primary btn2">Add</button>
+        </label>
+      </form>
+    </div>
+  </body>
+</html>
